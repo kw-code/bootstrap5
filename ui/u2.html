@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="../layui/css/layui.css">
+    <link rel="stylesheet" href="../layui_ext/dtree/dtree.css">
+    <link rel="stylesheet" href="../layui_ext/dtree/font/dtreefont.css">
+</head>
+<body>
+<!--layui中的dtree树学习-->
+<ul id="demoTree" class="dtree" data-id="0"></ul>
+
+<script src="../layui/layui.js"></script>
+<script src="../layui_ext/dist/dtree.js"></script>
+<script>
+    layui.extend({
+        dtree: '../layui_ext/dist/dtree'   // {/}的意思即代表采用自有路径，即不跟随 base 路径
+    }).use(['dtree','layer','jquery'], function(){
+        var dtree = layui.dtree, layer = layui.layer, $ = layui.jquery;
+
+        // 初始化树
+        var DemoTree = dtree.render({
+            elem: "#demoTree",
+            url: "../layui_ext/json/case/asyncTree1.json" // 使用url加载（可与data加载同时存在）
+        });
+
+        // 绑定节点点击
+        dtree.on("node('demoTree')" ,function(obj){
+            layer.msg(JSON.stringify(obj.param));
+        });
+    });
+</script>
+
+</body>
+</html>
